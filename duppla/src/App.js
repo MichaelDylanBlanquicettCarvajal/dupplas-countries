@@ -1,17 +1,21 @@
 import './App.css';
-import SearchBar from './Components/SearchBar';
-import Gallery from './Components/Gallery';
+import CountriesContainer from './Components/CountriesContainer';
+import CountryDetails from './Pages/CountryDetails';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App min-h-screen bg-cover bg-center bg-fixed">
-      <header className="App-header">
-        <SearchBar />
-        <div className="min-h-screen bg-gray-100">
-          <Gallery />
-        </div>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div
+        className="App min-h-screen bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: "url('/bogota.jpg')" }}
+      >
+        <Routes>
+          <Route path="/" element={<CountriesContainer />} />
+          <Route path="/CountryDetails/:name" element={<CountryDetails />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

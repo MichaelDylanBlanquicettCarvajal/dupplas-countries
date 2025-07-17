@@ -26,7 +26,7 @@ export default function Gallery({ search = '', region = '' }) {
   const ITEMS_PER_PAGE = 9;
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Filtrado eficiente
+  // Filtrado eficiente usando Country type
   const filteredCountries = countries
     .filter(country => !region || country.region === region)
     .filter(country => {
@@ -36,7 +36,7 @@ export default function Gallery({ search = '', region = '' }) {
         country.name.common.toLowerCase().includes(text) ||
         country.capital.join(', ').toLowerCase().includes(text) ||
         country.region.toLowerCase().includes(text) ||
-        country.subregion?.toLowerCase().includes(text)
+        (country.subregion?.toLowerCase().includes(text) ?? false)
       );
     });
 

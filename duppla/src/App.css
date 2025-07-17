@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.App {
+    background-image: url("/public/bogota.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+}
