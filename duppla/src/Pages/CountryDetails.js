@@ -1,5 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import './CountryDetails.css';
 
 
 export default function CountryDetails() {
@@ -50,7 +52,7 @@ export default function CountryDetails() {
         </button>
         <img src="/duppla.svg" alt="Duppla logo" style={{ height: 56 }} />
       </header>
-      <div style={{ padding: 24, maxWidth: 600, margin: '40px auto 0 auto' }}>
+      <div className="country-details-animate" style={{ padding: 24, maxWidth: 600, margin: '40px auto 0 auto' }}>
         <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: 16 }}>
           {country.name?.common || country.name}
         </h1>
