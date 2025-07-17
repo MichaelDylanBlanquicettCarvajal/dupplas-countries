@@ -1,78 +1,169 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './CountryDetails.css';
 
-
 export default function CountryDetails() {
-  const { name } = useParams();
-  const [country, setCountry] = useState(null);
-  const navigate = useNavigate();
+    const { name } = useParams();
+    const [country, setCountry] = useState(null);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(name)}?fields=name,flags,population,region,subregion,capital,currencies,languages`)
-      .then(res => res.json())
-      .then(data => setCountry(data[0]));
-  }, [name]);
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Backspace') {
+                navigate(-1);
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [navigate]);
 
-  if (!country) {
-    return <div>Cargando...</div>;
-  }
+    useEffect(() => {
+        fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(name)}?fields=name,flags,population,region,subregion,capital,currencies,languages`)
+            .then(res => res.json())
+            .then(data => setCountry(data[0]));
+    }, [name]);
 
-  // Helper to render currencies
-  const renderCurrencies = (currencies) => {
-    if (!currencies) return '—';
-    return Object.entries(currencies).map(([code, { name, symbol }]) => (
-      <span key={code}>{name} ({symbol}) [{code}]</span>
-    ));
-  };
+    if (!country) {
+        return <div>Cargando...</div>;
+    }
 
-  // Helper to render languages
-  const renderLanguages = (languages) => {
-    if (!languages) return '—';
-    return Object.values(languages).join(', ');
-  };
+    const renderCurrencies = (currencies) => {
+        if (!currencies) return '—';
+        return Object.entries(currencies).map(([code, { name, symbol }]) => (
+            <span key={code}>{name} ({symbol}) [{code}]</span>
+        ));
+    };
 
-  // Helper to render native names
-  const renderNativeNames = (nativeName) => {
-    if (!nativeName) return '—';
-    return Object.entries(nativeName).map(([lang, names]) => (
-      <span key={lang}>{names.official} ({names.common}) [{lang}]</span>
-    ));
-  };
+    const renderLanguages = (languages) => {
+        if (!languages) return '—';
+        return Object.values(languages).join(', ');
+    };
 
-  return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 10, padding: '24px 32px 0 32px' }}>
-        <button
-          onClick={() => navigate(-1)}
-          style={{ fontSize: 24, fontWeight: 700, padding: '12px 32px', borderRadius: 8, border: '2px solid #333', background: '#fff', color: '#333', boxShadow: '0 2px 8px #0002', cursor: 'pointer' }}
-        >
-          ← Regresar
-        </button>
-        <img src="/duppla.svg" alt="Duppla logo" style={{ height: 56 }} />
-      </header>
-      <div className="country-details-animate" style={{ padding: 24, maxWidth: 600, margin: '40px auto 0 auto' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: 16 }}>
-          {country.name?.common || country.name}
-        </h1>
-        <img
-          src={country.flags?.svg || country.flags?.png}
-          alt={country.flags?.alt || country.name?.common}
-          style={{ width: '200px', height: 'auto', marginBottom: 16, borderRadius: 8, boxShadow: '0 2px 8px #0002' }}
-        />
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          <li style={{ marginBottom: 8 }}><strong>Nombre oficial:</strong> {country.name?.official || '—'}</li>
-          <li style={{ marginBottom: 8 }}><strong>Nombre nativo:</strong> {renderNativeNames(country.name?.nativeName)}</li>
-          <li style={{ marginBottom: 8 }}><strong>Capital:</strong> {country.capital?.join(', ') || '—'}</li>
-          <li style={{ marginBottom: 8 }}><strong>Región:</strong> {country.region || '—'}</li>
-          <li style={{ marginBottom: 8 }}><strong>Subregión:</strong> {country.subregion || '—'}</li>
-          <li style={{ marginBottom: 8 }}><strong>Población:</strong> {country.population?.toLocaleString() || '—'}</li>
-          <li style={{ marginBottom: 8 }}><strong>Moneda(s):</strong> {renderCurrencies(country.currencies)}</li>
-          <li style={{ marginBottom: 8 }}><strong>Idioma(s):</strong> {renderLanguages(country.languages)}</li>
-          <li style={{ marginBottom: 8 }}><strong>Bandera:</strong> {country.flags?.alt || '—'}</li>
-        </ul>
-      </div>
-    </div>
-  );
+    const renderNativeNames = (nativeName) => {
+        if (!nativeName) return '—';
+        return Object.entries(nativeName).map(([lang, names]) => (
+            <span key={lang}>{names.official} ({names.common}) [{lang}]</span>
+        ));
+    };
+
+    return (
+        <div style={{ position: 'relative', minHeight: '100vh', width: '100%' }}>
+            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 10, padding: '24px 32px 0 32px', background: 'transparent' }}>
+                <button
+                    onClick={() => navigate(-1)}
+                    style={{ fontSize: 24, fontWeight: 700, padding: '12px 32px', borderRadius: 8, border: '2px solid #333', background: '#fff', color: '#333', boxShadow: '0 2px 8px #0002', cursor: 'pointer' }}
+                >
+                    ← Regresar
+                </button>
+                <img src="/duppla.svg" alt="Duppla logo" style={{ height: 56 }} />
+            </header>
+
+            {/* Caja superior: bandera y descripción */}
+            <div
+                className="countrydetails-flagbox"
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '100%',
+                    maxWidth: 1000,
+                    height: '60vh',
+                    minHeight: 320,
+                    margin: '32px auto 0 auto',
+                    borderRadius: 24,
+                    overflow: 'hidden',
+                    boxShadow: '0 4px 32px #0002',
+                    background: 'rgba(255,255,255,0.10)',
+                    backdropFilter: 'blur(2px)'
+                }}
+            >
+                <div className="countrydetails-flagimgbox" style={{
+                    width: '60%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'rgba(255,255,255,0.15)'
+                }}>
+                    <img
+                        src={country.flags?.svg || country.flags?.png}
+                        alt={country.flags?.alt || country.name?.common}
+                        style={{
+                            width: '90%',
+                            height: '90%',
+                            objectFit: 'contain',
+                            borderRadius: 18,
+                            boxShadow: '0 4px 24px #0002',
+                            background: 'rgba(255,255,255,0.2)'
+                        }}
+                    />
+                </div>
+                <div className="countrydetails-flagdescbox" style={{
+                    width: '40%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'rgba(255,255,255,0.35)',
+                    backdropFilter: 'blur(2px)'
+                }}>
+                    <div style={{
+                        fontSize: '1.7rem',
+                        fontWeight: 600,
+                        color: '#222',
+                        textAlign: 'center',
+                        padding: '32px 20px',
+                        width: '100%',
+                        minHeight: 120,
+                        lineHeight: 1.3
+                    }}>
+                        {country.flags?.alt || 'Sin descripción de la bandera.'}
+                    </div>
+                </div>
+            </div>
+
+            {/* Detalles en tarjetas pequeñas debajo */}
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: 20,
+                maxWidth: 1000,
+                margin: '24px auto 40px auto',
+                padding: '0 16px',
+                alignItems: 'stretch',
+            }}>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">NOMBRE OFICIAL</div>
+                    <div>{country.name?.official || '—'}</div>
+                </div>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">NOMBRE NATIVO</div>
+                    <div>{renderNativeNames(country.name?.nativeName)}</div>
+                </div>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">CAPITAL</div>
+                    <div>{country.capital?.join(', ') || '—'}</div>
+                </div>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">REGIÓN</div>
+                    <div>{country.region || '—'}</div>
+                </div>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">SUBREGIÓN</div>
+                    <div>{country.subregion || '—'}</div>
+                </div>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">POBLACIÓN</div>
+                    <div>{country.population?.toLocaleString() || '—'}</div>
+                </div>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">MONEDA(S)</div>
+                    <div>{renderCurrencies(country.currencies)}</div>
+                </div>
+                <div className="country-card-cyan">
+                    <div className="country-card-cyan-title">IDIOMA(S)</div>
+                    <div>{renderLanguages(country.languages)}</div>
+                </div>
+            </div>
+        </div>
+    );
 }

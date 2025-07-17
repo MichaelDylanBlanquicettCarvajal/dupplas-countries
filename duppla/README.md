@@ -1,70 +1,95 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Duppla Countries
 
-## Available Scripts
+¡Bienvenido a Duppla Countries! Este proyecto es una galería interactiva de países, creada con React y pensada para demostrar mi uso de las herramientas solicitadas para ofrecer una navegabilidad entre paises.
 
-In the project directory, you can run:
+## Características principales
 
-### `npm start`
+- **Galería animada de países**: Navega por tarjetas de países con animaciones suaves y transiciones de página (slide izquierda/derecha).
+- **Búsqueda y filtrado**: Filtra países por nombre, capital o región en tiempo real.
+- **Detalles**: Cada país muestra información detallada con animación de aparición (fade-in).
+- **Imágenes de banderas**: Las tarjetas usan la bandera como fondo, con overlays translúcidos para la información.
+- **Paginación**: Barra de paginación fija, responsiva y ajustable automáticamente. Navegación con teclado (flechas izquierda/derecha).
+- **Regreso rápido**: Desde la vista de detalles puedes volver con la tecla "Backspace".
+- **Diseño responsivo**: Adaptado para móviles y escritorio, con animaciones y estilos que mejoran la experiencia en cualquier dispositivo.
+- **Accesibilidad**: Navegación por teclado y botones accesibles.
+- **Buenas prácticas**: Uso de hooks de React, separación de componentes, manejo eficiente de estado y efectos.
+- **Tailwind CSS**: Utilizado para estilos rápidos, responsivos y modernos.
+- **API REST**: Datos obtenidos en tiempo real desde [restcountries.com](https://restcountries.com).
+- **Animaciones CSS personalizadas**: Para transiciones de página y aparición de detalles.
+- **Gestión de dependencias**: Todo lo necesario está en `package.json`, listo para instalar con `npm install` en cualquier dispositivo.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Decisiones técnicas destacadas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React Functional Components**: Todo el proyecto usa componentes funcionales y hooks para.
+- **Separación de lógica y presentación**: Cada componente tiene responsabilidades claras (búsqueda, galería, detalles, etc).
+- **Animaciones CSS**: Se crearon animaciones personalizadas para mejorar la experiencia visual.
+- **Paginación y filtrado eficiente**: El filtrado y la paginación se hacen sobre los datos ya cargados, optimizando el rendimiento.
+- **Accesibilidad y usabilidad**: Se pensó en la navegación por teclado y en la claridad visual de los elementos.
+- **Responsive Design**: El layout y los componentes se adaptan a cualquier tamaño de pantalla.
+- **Código limpio y comentado**: El código está estructurado y documentado para facilitar su mantenimiento y evolución.
 
-### `npm test`
+## Guía paso a paso para compilar
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Instala Node.js**  
+    Ve a [nodejs.org](https://nodejs.org/) y descarga la versión recomendada para tu sistema operativo (Windows, Mac o Linux). Instálalo siguiendo las instrucciones.
 
-### `npm run build`
+2. **Descarga el proyecto**  
+    Haz clic en el botón "Code" de este repositorio y selecciona "Download ZIP". Extrae el archivo ZIP en una carpeta de tu computadora.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Abre la carpeta del proyecto**  
+    Busca la carpeta extraída (por ejemplo, `duppla-countries`) y ábrela.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Abre una terminal o línea de comandos**  
+    - En Windows: Busca "Símbolo del sistema" o "Terminal" en el menú de inicio.
+    - En Mac: Abre "Terminal" desde Aplicaciones > Utilidades.
+    - En Linux: Abre tu terminal habitual.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. **Navega a la carpeta del proyecto**  
+    Escribe el siguiente comando y presiona Enter (reemplaza la ruta si es necesario):
 
-### `npm run eject`
+    ```bash
+    cd ruta/del/proyecto
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    Por ejemplo, si está en Descargas:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```bash
+    cd Descargas/duppla-countries
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+6. **Instala las dependencias**  
+    Escribe y ejecuta:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    ```bash
+    npm install
+    ```
 
-## Learn More
+    Esto descargará todo lo necesario para que funcione la app.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+7. **Inicia la aplicación**  
+    Escribe y ejecuta:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```bash
+    npm start
+    ```
 
-### Code Splitting
+    Se abrirá una ventana en tu navegador con la galería de países.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+¡Listo! Ya puedes explorar la aplicación. Si tienes dudas, busca tutoriales de "cómo usar Node.js y npm" en YouTube para ver ejemplos visuales.
 
-### Analyzing the Bundle Size
+## Atajos y tips
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Usa las flechas izquierda/derecha para navegar entre páginas en la galería.
+- Presiona "Backspace" en la vista de detalles para regresar rápidamente.
+- Filtra países por nombre, capital o región usando la barra de búsqueda.
 
-### Making a Progressive Web App
+## Herramientas usadas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [restcountries.com](https://restcountries.com) por la API de datos.
+- [Node.js](https://nodejs.org/en) Ambiente de ejecución
+- [Tailwind CSS](https://tailwindcss.com/) Extension para facilitar el uso de los estilos.
+- [React](https://react.dev/) libreria usada para la interfaz.
+- [VSCode](https://code.visualstudio.com/) IDE usado.
+- Inspiración y feedback de la comunidad Duppla.
+- GPT (Usado para realizar algunas acciones visuales y acceder rapidamente a elementos que desconocia (Hooks, loadTime, unBound y Props))

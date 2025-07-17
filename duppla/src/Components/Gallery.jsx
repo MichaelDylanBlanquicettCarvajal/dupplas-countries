@@ -62,6 +62,25 @@ export default function Gallery({ search = '', region = '' }) {
     prevPageRef.current = currentPage;
   }, [currentPage]);
 
+  // Navegación con teclado (PC)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') {
+        if (currentPage > 1) {
+          setSlideDirection('left');
+          setCurrentPage((p) => Math.max(1, p - 1));
+        }
+      } else if (e.key === 'ArrowRight') {
+        if (currentPage < totalPages) {
+          setSlideDirection('right');
+          setCurrentPage((p) => Math.min(totalPages, p + 1));
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentPage, totalPages]);
+
   return (
     <div className="w-full min-h-[90vh] mt-[10vh] px-6 py-8 bg-cover bg-center overflow-y-auto">
       <div
@@ -141,7 +160,8 @@ export default function Gallery({ search = '', region = '' }) {
       </div>
       {countries.length > ITEMS_PER_PAGE && (
         <div
-          className="fixed bottom-2 left-1/2 transform -translate-x-1/2 w-[20%] h-[7vh] bg-white/40 backdrop-blur-md shadow-md rounded-full flex items-center justify-center px-6 gap-6 z-40"
+          className="fixed bottom-2 left-1/2 transform -translate-x-1/2 min-w-[220px] max-w-[90vw] w-fit h-[7vh] bg-white/40 backdrop-blur-md shadow-md rounded-full flex items-center justify-center px-2 md:px-6 gap-2 md:gap-6 z-40"
+          style={{ boxSizing: 'border-box' }}
         >
           <button
             onClick={() => {
