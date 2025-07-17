@@ -1,13 +1,15 @@
 import './App.css';
 import SearchBar from './Components/SearchBar';
-import Content from './Components/Content';
+import Gallery from './Components/Gallery';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App min-h-screen bg-cover bg-center bg-fixed">
       <header className="App-header">
-        <SearchBar/>
-        <Content/>
+        <SearchBar />
+        <div className="min-h-screen bg-gray-100">
+          <Gallery />
+        </div>
       </header>
     </div>
   );
