@@ -29,6 +29,7 @@ export default function Gallery({ search = '', region = '' }) {
   // Animación de carga al buscar o filtrar
   useEffect(() => {
     if (countries.length === 0) return;
+    setCurrentPage(1);
     setLoading(true);
     const timeout = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timeout);
