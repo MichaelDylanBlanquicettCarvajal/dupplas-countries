@@ -111,53 +111,31 @@ export default function Gallery({ search = '', region = '' }) {
           paginated.map((country, index) => (
             <button
               key={index}
-              className="relative rounded-lg shadow-md hover:shadow-lg transition w-full text-left cursor-pointer overflow-hidden flex flex-col justify-end"
-              style={{
-                backgroundImage: country.flags.svg ? `url(${country.flags.svg})` : 'none',
-                backgroundSize: country.flags.svg ? 'contain' : 'initial',
-                backgroundRepeat: country.flags.svg ? 'no-repeat' : 'initial',
-                backgroundPosition: 'center',
-                backgroundColor: country.flags.svg ? 'transparent' : '#e5e7eb',
-                minHeight: '260px',
-                height: '100%',
-              }}
+              className="relative rounded-lg shadow-md hover:shadow-lg transition w-full text-left cursor-pointer overflow-hidden flex flex-col bg-white/40 backdrop-blur-md"
+              style={{ minHeight: '260px', height: '100%' }}
               onClick={() => navigate(`/CountryDetails/${encodeURIComponent(country.name.common)}`)}
             >
-              <div
-                className="absolute top-4 left-4"
-                style={{
-                  background: 'rgba(132, 255, 183, 0.35)', // light green
-                  borderRadius: '0.75rem',
-                  padding: '0.35rem 1rem',
-                  color: '#111', // black text
-                  fontWeight: 'bold',
-                  fontSize: '1.15rem',
-                  textAlign: 'left',
-                  letterSpacing: '0.5px',
-                  boxShadow: '0 2px 8px #05966922',
-                  zIndex: 2,
-                  width: 'auto',
-                  minWidth: 'fit-content',
-                  maxWidth: '80%',
-                  border: 'none',
-                }}
-              >
-                {country.name.common.toUpperCase()}
+              {/* Bandera */}
+              <div className="w-full flex items-center justify-center" style={{ height: '55%' }}>
+                {country.flags.svg ? (
+                  <img
+                    src={country.flags.svg}
+                    alt={`Bandera de ${country.name.common}`}
+                    className="object-contain w-full h-full max-h-32 md:max-h-40"
+                    style={{ pointerEvents: 'none', userSelect: 'none' }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">Sin bandera</div>
+                )}
               </div>
+              {/* Información */}
               <div
-                className="absolute left-0 bottom-0 w-full"
-                style={{
-                  height: '40%',
-                  background: 'rgba(255,255,255,0.65)', // more translucent
-                  backdropFilter: 'blur(2px)',
-                  borderTopLeftRadius: '0.75rem',
-                  borderTopRightRadius: '0.75rem',
-                  padding: '1rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-end',
-                }}
+                className="w-full flex flex-col justify-end px-4 py-3 bg-white/70 backdrop-blur-sm"
+                style={{ height: '45%' }}
               >
+                <div className="font-bold text-lg text-gray-900 mb-1 break-words leading-tight uppercase" style={{ wordBreak: 'break-word' }} title={country.name.common}>
+                  {country.name.common}
+                </div>
                 <p className="text-sm"><strong>Capital:</strong> {country.capital.join(', ')}</p>
                 <p className="text-sm"><strong>Región:</strong> {country.region}</p>
                 <p className="text-sm"><strong>Subregión:</strong> {country.subregion}</p>

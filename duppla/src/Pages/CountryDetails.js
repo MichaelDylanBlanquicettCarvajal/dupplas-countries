@@ -48,14 +48,40 @@ export default function CountryDetails() {
 
     return (
         <div style={{ position: 'relative', minHeight: '100vh', width: '100%' }}>
-            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 10, padding: '24px 32px 0 32px', background: 'transparent' }}>
+            <header style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                position: 'sticky',
+                top: 0,
+                zIndex: 10,
+                padding: '16px 32px',
+                background: 'rgba(255,255,255,0.55)',
+                backdropFilter: 'blur(6px)',
+                WebkitBackdropFilter: 'blur(6px)',
+                boxShadow: '0 2px 12px #0001',
+            }}>
                 <button
                     onClick={() => navigate(-1)}
-                    style={{ fontSize: 24, fontWeight: 700, padding: '12px 32px', borderRadius: 8, border: '2px solid #333', background: '#fff', color: '#333', boxShadow: '0 2px 8px #0002', cursor: 'pointer' }}
+                    style={{
+                        fontSize: 20,
+                        fontWeight: 800,
+                        padding: '12px 22px',
+                        borderRadius: 999,
+                        border: '2px solid #06b6d4',
+                        background: 'rgba(6,182,212,0.18)',
+                        color: '#111',
+                        boxShadow: '0 2px 8px #06b6d422',
+                        cursor: 'pointer',
+                        transition: 'background 0.2s',
+                        minWidth: 0,
+                        letterSpacing: '0.5px',
+                        textTransform: 'none',
+                    }}
                 >
-                    ← Regresar
+                    ← <span style={{fontWeight: 800}}>Regresar</span>
                 </button>
-                <img src="/duppla.svg" alt="Duppla logo" style={{ height: 56 }} />
+                <img src="/duppla.svg" alt="Duppla logo" style={{ height: 56, display: 'block', margin: 0, padding: 0 }} />
             </header>
 
             {/* Caja superior: bandera y descripción */}

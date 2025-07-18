@@ -7,8 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <div
-        className="App min-h-screen bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: "url('/bogota.jpg')" }}
+        className="min-h-screen bg-bogota bg-cover bg-center bg-fixed"
       >
         <Routes>
           <Route path="/" element={<CountriesContainer />} />
