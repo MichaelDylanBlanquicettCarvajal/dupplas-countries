@@ -26,6 +26,14 @@ export default function Gallery({ search = '', region = '' }) {
       .finally(() => setLoading(false));
   }, []);
 
+  // Animación de carga al buscar o filtrar
+  useEffect(() => {
+    if (countries.length === 0) return;
+    setLoading(true);
+    const timeout = setTimeout(() => setLoading(false), 600);
+    return () => clearTimeout(timeout);
+  }, [search, region, countries.length]);
+
   const ITEMS_PER_PAGE = 9;
   const [currentPage, setCurrentPage] = useState(1);
   const [slideDirection, setSlideDirection] = useState(null); // 'left' | 'right' | null
@@ -88,10 +96,10 @@ export default function Gallery({ search = '', region = '' }) {
         key={currentPage} // fuerza re-montaje para animación
       >
         {loading ? (
-          <div className="text-center col-span-3">
+          <div className="text-center col-span-3 animate-fadein">
             <h2 className="text-2xl font-bold mb-4">Galería de países</h2>
-            <span className="text-3xl animate-pulse">⏳</span>
-            <p className="text-gray-600 mt-2">Cargando datos...</p>
+            <span className="text-5xl animate-spin inline-block mb-2">🌎</span>
+            <p className="text-cyan-700 mt-2 font-semibold">Cargando países...</p>
           </div>
         ) : filteredCountries.length === 0 ? (
           <div className="text-center col-span-3">
